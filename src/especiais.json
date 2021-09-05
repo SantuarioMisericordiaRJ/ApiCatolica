@@ -11,9 +11,14 @@
   {
     "data":"2021-09-08",
     "nome":"Natividade de Nossa Senhora",
+    "ant1":8,
+    "odd":4,
     "1":"Mq 5,1-4a",
     "r":"Sl 70",
     "acl":11,
-    "e":"Mt 1,18-23"
+    "e":"Mt 1,18-23",
+    "ofe":4,
+    "ant2":7,
+    "dep":4
   }
 ]
