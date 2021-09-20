@@ -58,5 +58,21 @@
     "ofe":9,
     "ant2":18,
     "dep":9
+  },
+  "2021-09-20":{
+    "nome":"Santos André Kim e Paulo Chong",
+    "ant1":25,
+    "odd":13,
+    "ofe":13,
+    "ant2":26,
+    "dep":13
+  },
+  "2021-09-27":{
+    "nome":"São Vicente de Paulo",
+    "ant1":23,
+    "odd":12,
+    "ofe":12,
+    "ant2":24,
+    "dep":12
   }
 }
