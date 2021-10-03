@@ -1,5 +1,5 @@
 <?php
-//2021.10.03.00
+//2021.10.03.01
 //Protocol Corporation Ltda.
 //https://github.com/SantuarioMisericordiaRJ/ApiCatolica
 
@@ -9,6 +9,7 @@
 
 define('Pasta', dirname(__DIR__, 1));
 require(Pasta . '/tools/anoliturgico.php');
+require(Pasta . '/tools/funcoes.php');
 
 $_GET['dia'] ??= date('Y-m-d');
 $Ts = strtotime($_GET['dia']);
@@ -16,6 +17,8 @@ $AnoLiturgico = new AnoLiturgico($Ts);
 
 $index = file_get_contents(Pasta . '/src/index.json');
 $index = json_decode($index, true);
+$datas = file_get_contents(Pasta . '/src/datas.json');
+$datas = json_decode($datas, true);
 $especiais = file_get_contents(Pasta . '/src/especiais.json');
 $especiais = json_decode($especiais, true);
 
@@ -33,37 +36,40 @@ elseif(date('Y') % 2 === 0):
 else:
   $ano = 'i';
 endif;
+if(isset($datas[$_GET['dia']])):
+  $especial = $especiais[$datas[$_GET['dia']]];
+endif;
 
 echo '<h2>' . $_GET['dia'] . '<br>';
 echo $semana . 'ª semana do ' . $Tempos[$tempo][1] . ' - ' . $Semanas[$DiaSemana] . '</h2>';
 
 echo '<b>Antífona 1</b><br>';
-$temp = $especiais[$_GET['dia']]['ant1'] ?? $index[$Tempos[$tempo][0]][$semana]['ant1'];
+$temp = $especial['ant1'] ?? $index[$Tempos[$tempo][0]][$semana]['ant1'];
 $temp = file_get_contents(Pasta . '/src/antifonas/entrada/' . $temp . '.txt');
 echo $temp . '<br><br>';
 
 echo '<b>Oração do dia</b><br>';
-$temp = $especiais[$_GET['dia']]['odd'] ?? $index[$Tempos[$tempo][0]][$semana]['odd'];
+$temp = $especial['odd'] ?? $index[$Tempos[$tempo][0]][$semana]['odd'];
 $temp = file_get_contents(Pasta . '/src/oracoes/dodia/' . $temp . '.txt');
 echo $temp . '<br><br>';
 
 echo '<b>1ª leitura</b><br>';
-$temp = $especiais[$_GET['dia']][1] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana][$ano][1];
+$temp = $especial[1] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana][$ano][1];
 echo $temp . '<br><br>';
 
-$temp = $especiais[$_GET['dia']]['r'] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana][$ano]['r'] ?? null;
+$temp = $especial['r'] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana][$ano]['r'] ?? null;
 if($temp !== null):
   echo '<b>Responsório:</b><br>';
   echo $temp . '<br><br>';
 endif;
 
-$temp = $especiais[$_GET['dia']][2] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana][$ano][2] ?? null;
+$temp = $especial[2] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana][$ano][2] ?? null;
 if($temp !== null):
   echo '<b>2ª leitura:</b><br>';
   echo $temp . '<br><br>';
 endif;
 
-$temp = $especiais[$_GET['dia']]['acl'] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana][$ano]['acl'] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana]['acl'] ?? null;
+$temp = $especial['acl'] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana][$ano]['acl'] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana]['acl'] ?? null;
 if($temp !== null):
   echo '<b>Aclamação:</b><br>';
   $temp = file_get_contents(Pasta . '/src/aclamacoes/' . $temp . '.txt');
@@ -71,10 +77,10 @@ if($temp !== null):
 endif;
 
 echo '<b>Evangelho:</b><br>';
-$temp = $especiais[$_GET['dia']]['e'] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana][$ano]['e'] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana]['e'];
+$temp = $especial['e'] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana][$ano]['e'] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana]['e'];
 echo $temp . '<br><br>';
 
-$temp = $especiais[$_GET['dia']]['ofe'] ?? $index[$Tempos[$tempo][0]][$semana]['ofe'] ?? null;
+$temp = $especial['ofe'] ?? $index[$Tempos[$tempo][0]][$semana]['ofe'] ?? null;
 if($temp !== null):
   echo '<b>Sobre as oferendas:</b><br>';
   $temp = file_get_contents(Pasta . '/src/oracoes/oferendas/' . $temp . '.txt');
@@ -82,11 +88,11 @@ if($temp !== null):
 endif;
 
 echo '<b>Antífona 2:</b><br>';
-$temp = $especiais[$_GET['dia']]['ant2'] ?? $index[$Tempos[$tempo][0]][$semana]['ant2'];
+$temp = $especial['ant2'] ?? $index[$Tempos[$tempo][0]][$semana]['ant2'];
 $temp = file_get_contents(Pasta . '/src/antifonas/depois/' . $temp . '.txt');
 echo $temp . '<br><br>';
 
 echo '<b>Depois da comunhão:</b><br>';
-$temp = $especiais[$_GET['dia']]['dep'] ?? $index[$Tempos[$tempo][0]][$semana]['dep'];
+$temp = $especial['dep'] ?? $index[$Tempos[$tempo][0]][$semana]['dep'];
 $temp = file_get_contents(Pasta . '/src/oracoes/depois/' . $temp . '.txt');
 echo $temp . '<br><br>';
