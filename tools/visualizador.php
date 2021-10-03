@@ -1,5 +1,5 @@
 <?php
-//2021.10.03.02
+//2021.10.03.03
 //Protocol Corporation Ltda.
 //https://github.com/SantuarioMisericordiaRJ/ApiCatolica
 
@@ -62,6 +62,15 @@ $temp = $especial['r'] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana][$ano][
 if($temp !== null):
   echo '<b>Responsório:</b><br>';
   echo $temp . '<br><br>';
+endif;
+$temp = $especial['rt'] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana][$ano]['rt'] ?? null;
+if($temp !== null):
+  $temp = file_get_contents(Pasta . '/src/salmos/' . $temp . '.json');
+  $temp = json_decode($temp, true);
+  foreach($temp as $id => $temp2):
+    echo $id . ' - ' . $temp2 . '<br>';
+  endforeach;
+  echo '<br>';
 endif;
 
 $temp = $especial[2] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana][$ano][2] ?? null;
