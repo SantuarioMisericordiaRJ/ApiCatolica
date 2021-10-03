@@ -1,5 +1,5 @@
 <?php
-//2021.10.03.01
+//2021.10.03.02
 //Protocol Corporation Ltda.
 //https://github.com/SantuarioMisericordiaRJ/ApiCatolica
 
@@ -51,6 +51,7 @@ echo $temp . '<br><br>';
 echo '<b>Oração do dia</b><br>';
 $temp = $especial['odd'] ?? $index[$Tempos[$tempo][0]][$semana]['odd'];
 $temp = file_get_contents(Pasta . '/src/oracoes/dodia/' . $temp . '.txt');
+$temp = str_replace("\n", '<br>', $temp);
 echo $temp . '<br><br>';
 
 echo '<b>1ª leitura</b><br>';
@@ -73,6 +74,7 @@ $temp = $especial['acl'] ?? $index[$Tempos[$tempo][0]][$semana][$DiaSemana][$ano
 if($temp !== null):
   echo '<b>Aclamação:</b><br>';
   $temp = file_get_contents(Pasta . '/src/aclamacoes/' . $temp . '.txt');
+  $temp = str_replace("\n", '<br>', $temp);
   echo $temp . '<br><br>';
 endif;
 
@@ -84,6 +86,7 @@ $temp = $especial['ofe'] ?? $index[$Tempos[$tempo][0]][$semana]['ofe'] ?? null;
 if($temp !== null):
   echo '<b>Sobre as oferendas:</b><br>';
   $temp = file_get_contents(Pasta . '/src/oracoes/oferendas/' . $temp . '.txt');
+  $temp = str_replace("\n", '<br>', $temp);
   echo $temp . '<br><br>';
 endif;
 
@@ -95,4 +98,5 @@ echo $temp . '<br><br>';
 echo '<b>Depois da comunhão:</b><br>';
 $temp = $especial['dep'] ?? $index[$Tempos[$tempo][0]][$semana]['dep'];
 $temp = file_get_contents(Pasta . '/src/oracoes/depois/' . $temp . '.txt');
+$temp = str_replace("\n", '<br>', $temp);
 echo $temp . '<br><br>';
