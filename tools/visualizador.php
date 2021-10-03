@@ -1,5 +1,5 @@
 <?php
-//2021.10.03.03
+//2021.10.03.04
 //Protocol Corporation Ltda.
 //https://github.com/SantuarioMisericordiaRJ/ApiCatolica
 
@@ -43,7 +43,7 @@ endif;
 echo '<h2>' . $_GET['dia'] . '<br>';
 echo $semana . 'ª semana do ' . $Tempos[$tempo][1] . ' - ' . $Semanas[$DiaSemana] . '</h2>';
 
-echo '<b>Antífona 1</b><br>';
+echo '<b>Antífona da entrada</b><br>';
 $temp = $especial['ant1'] ?? $index[$Tempos[$tempo][0]][$semana]['ant1'];
 $temp = file_get_contents(Pasta . '/src/antifonas/entrada/' . $temp . '.txt');
 echo $temp . '<br><br>';
@@ -99,7 +99,7 @@ if($temp !== null):
   echo $temp . '<br><br>';
 endif;
 
-echo '<b>Antífona 2:</b><br>';
+echo '<b>Antífona da comunhão:</b><br>';
 $temp = $especial['ant2'] ?? $index[$Tempos[$tempo][0]][$semana]['ant2'];
 $temp = file_get_contents(Pasta . '/src/antifonas/depois/' . $temp . '.txt');
 echo $temp . '<br><br>';
