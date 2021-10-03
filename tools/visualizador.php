@@ -1,5 +1,5 @@
 <?php
-//2021.10.03.04
+//2021.10.03.05
 //Protocol Corporation Ltda.
 //https://github.com/SantuarioMisericordiaRJ/ApiCatolica
 
@@ -41,7 +41,11 @@ if(isset($datas[$_GET['dia']])):
 endif;
 
 echo '<h2>' . $_GET['dia'] . '<br>';
-echo $semana . 'ª semana do ' . $Tempos[$tempo][1] . ' - ' . $Semanas[$DiaSemana] . '</h2>';
+echo $semana . 'ª semana do ' . $Tempos[$tempo][1] . ' - ' . $Semanas[$DiaSemana];
+if(isset($especial['nome'])):
+  echo '<br>' . $especial['nome'];
+endif;
+echo '</h2>';
 
 echo '<b>Antífona da entrada</b><br>';
 $temp = $especial['ant1'] ?? $index[$Tempos[$tempo][0]][$semana]['ant1'];
