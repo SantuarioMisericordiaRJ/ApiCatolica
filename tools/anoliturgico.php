@@ -1,5 +1,5 @@
 <?php
-//2021.09.07.00
+//2021.10.08.00
 //Protocol Corporation Ltda.
 //https://github.com/SantuarioMisericordiaRJ/ApiCatolica
 
@@ -20,7 +20,7 @@ class AnoLiturgico{
 
   private function CalculaAno(int $Timestamp){
     //Cria o timestamp do natal do ano anterior
-    $this->Cache[self::TempoNatal][0] = mktime(0, 0, 0, 12, 25, date('Y', $Timestamp) - 1);
+    $this->Cache[self::TempoNatal][25] = mktime(0, 0, 0, 12, 25, date('Y', $Timestamp) - 1);
     //Subtrai 3 semanas e pega o dia da semana
     $this->Cache[self::TempoAdvento][1] = strtotime('-3 weeks', $this->Cache[self::TempoNatal][0]);
     $DiaSemana = date('N', $this->Cache[self::TempoAdvento][1]);
@@ -33,10 +33,10 @@ class AnoLiturgico{
     $this->Cache[self::TempoAdvento][4] = strtotime('+1 week', $this->Cache[self::TempoAdvento][3]);
 
     $DiaSemana = date('N', $this->Cache[self::TempoNatal][0]);
-    $this->Cache[self::TempoNatal][1] = strtotime('+' . (7 - $DiaSemana) . 'days', $this->Cache[self::TempoNatal][0]);
+    $this->Cache[self::TempoNatal]['sgf'] = strtotime('+' . (7 - $DiaSemana) . 'days', $this->Cache[self::TempoNatal][25]);
     $this->Cache[self::TempoNatal][2] = strtotime('+1 week', $this->Cache[self::TempoNatal][1]);
 
-    $this->Cache[self::TempoEpifania] = strtotime('+12 day', $this->Cache[self::TempoNatal][0]);
+    $this->Cache[self::TempoEpifania] = strtotime('+12 day', $this->Cache[self::TempoNatal][25]);
     $DiaSemana = date('N', $this->Cache[self::TempoEpifania]);
     $this->Cache[self::TempoComum][1] = strtotime('+' . (7 - $DiaSemana) . ' day', $this->Cache[self::TempoEpifania]);
     $this->Cache[self::TempoComum][2] = strtotime('+1 week', $this->Cache[self::TempoComum][1]);
