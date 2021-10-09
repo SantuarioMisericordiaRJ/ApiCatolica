@@ -1,5 +1,5 @@
 <?php
-//2021.10.09.00
+//2021.10.09.01
 //Protocol Corporation Ltda.
 //https://github.com/SantuarioMisericordiaRJ/ApiCatolica
 
@@ -34,7 +34,7 @@ class AnoLiturgico{
 
     $DiaSemana = date('N', $this->Cache[self::TempoNatal][25]);
     $this->Cache[self::TempoNatal]['sgf'] = strtotime('+' . (7 - $DiaSemana) . 'days', $this->Cache[self::TempoNatal][25]);
-    $this->Cache[self::TempoNatal][2] = strtotime('+1 week', $this->Cache[self::TempoNatal][1]);
+    $this->Cache[self::TempoNatal][2] = strtotime('+1 week', $this->Cache[self::TempoNatal]['sgf']);
 
     $this->Cache[self::TempoEpifania] = strtotime('+12 day', $this->Cache[self::TempoNatal][25]);
     $DiaSemana = date('N', $this->Cache[self::TempoEpifania]);
