@@ -1,5 +1,5 @@
 <?php
-//2021.10.03.05
+//2021.10.11.00
 //Protocol Corporation Ltda.
 //https://github.com/SantuarioMisericordiaRJ/ApiCatolica
 
@@ -36,8 +36,8 @@ elseif(date('Y') % 2 === 0):
 else:
   $ano = 'i';
 endif;
-if(isset($datas[$_GET['dia']])):
-  $especial = $especiais[$datas[$_GET['dia']]];
+if(isset($datas['all'][$_GET['dia']])):
+  $especial = $especiais[$datas['all'][$_GET['dia']]];
 endif;
 
 echo '<h2>' . $_GET['dia'] . '<br>';
