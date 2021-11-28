@@ -1,5 +1,5 @@
 <?php
-//2021.10.09.01
+//2021.10.28.00
 //Protocol Corporation Ltda.
 //https://github.com/SantuarioMisericordiaRJ/ApiCatolica
 
@@ -139,6 +139,12 @@ class AnoLiturgico{
 
   public function DatasGet(){
     return $this->Cache[self::Datas];
+  }
+
+  public function TemposGet(){
+    $temp = $this->Cache;
+    unset($temp[self::Datas]);
+    return $temp;
   }
 
   /**
